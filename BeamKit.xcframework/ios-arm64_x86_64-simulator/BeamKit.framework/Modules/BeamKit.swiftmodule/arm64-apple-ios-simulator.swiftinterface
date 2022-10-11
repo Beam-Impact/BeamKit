@@ -1,0 +1,479 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
+// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BeamKit
+import Foundation
+import Foundation/*.Bundle*/
+import Swift
+import SwiftUI
+import _Concurrency
+public enum BKAppEnvironment {
+  case development
+  case production
+  case staging
+  public static func == (a: BeamKit.BKAppEnvironment, b: BeamKit.BKAppEnvironment) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum BKError : Swift.Error {
+  case invalidUser
+  case invalidStore
+  case invalidCredentials
+  case invalidConfiguration
+  case invalidResponse
+  case networkError
+  case none
+  case parsingError
+  public static func == (a: BeamKit.BKError, b: BeamKit.BKError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum BKLogLevel : Swift.Int {
+  case debug
+  case info
+  case warning
+  case error
+  case critical
+  case exception
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 13.0, *)
+public class BKManager {
+  public init(apiKey: Swift.String, chainId: Swift.Int, environment: BeamKit.BKAppEnvironment = .staging, logLevel: BeamKit.BKLogLevel = .info, fontRegular: BeamKit.FontInfo? = nil, fontSemiBold: BeamKit.FontInfo? = nil, fontBold: BeamKit.FontInfo? = nil, progressBarConfig: BeamKit.BKProgressBarConfiguration = BKProgressBarConfiguration(), schemaVersion: Swift.String)
+  public func registerUser(email: Swift.String, _ completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func deregisterUser(_ completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func startTransaction(_ transaction: BeamKit.BKTransaction, _ completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func finishTransaction(orderId: Swift.String, email: Swift.String? = nil, _ completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func cancelTransaction(orderId: Swift.String, _ completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func redeemTransaction(transaction: BeamKit.BKTransaction, orderId: Swift.String, _ completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  public func getSelectedNonprofit() -> (Swift.String?, Swift.String?)
+  @objc deinit
+}
+@available(iOS 13.0, *)
+public struct BKCommunityImpactViewConfiguration {
+  public init(nonprofitNameTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 18), showImpactButtonConfig: BeamKit.BKButtonConfiguration = BKButtonConfiguration(unselectedColor: .black,
+																					  borderConfig: BKBorderConfiguration(cornerRadius: 5),
+																					  textConfig: BKTextConfiguration(color: .white, size: 16)), imageConfig: BeamKit.BKImageConfiguration = BKImageConfiguration(size: CGSize(width: 300, height: 100)), cornerRadius: CoreGraphics.CGFloat = 5, backgroundColor: SwiftUI.Color = Color(gray: 0.9), progressBarHorizontalPadding: CoreGraphics.CGFloat = 20, horizontalPadding: CoreGraphics.CGFloat = 10, verticalPadding: CoreGraphics.CGFloat = 20)
+}
+@available(iOS 13.0, *)
+public struct BKFullScreenNonprofitViewConfiguration {
+  public init(widgetTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 30.0,
+																			 weight: .bold), widgetSubtitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 16.0), imageConfig: BeamKit.BKImageConfiguration = BKImageConfiguration(cornerRadius: 20,
+																		 shape: .square,
+																		 size: CGSize(width: 100, height: 100)), causeTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 10.0), nonprofitTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 16.0,
+																				weight: .bold), causeDescriptionConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(color: Color(gray: 0.5),
+																				  size: 11.0), confirmButtonConfig: BeamKit.BKButtonConfiguration = BKButtonConfiguration(unselectedColor: .green,
+																				   borderConfig: BKBorderConfiguration(color: .clear),
+																				   textConfig: BKTextConfiguration(color: .white,
+																												   size: 16.0,
+																												   weight: .bold)), unselectedBorderColor: SwiftUI.Color = Color(gray: 0.6), selectedBorderColor: SwiftUI.Color = Color(gray: 0.2), selectedBorderCornerRadius: CoreGraphics.CGFloat = 20, unselectedBackgroundColor: SwiftUI.Color = .white, selectedBackgroundColor: SwiftUI.Color = Color(gray: 0.1, opacity: 0.1), beamTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), verticalPadding: CoreGraphics.CGFloat = 1, backgroundColor: SwiftUI.Color = .white)
+}
+@available(iOS 13.0, *)
+public struct BKImpactListConfiguration {
+  public init(selectedTabTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(color: .white,
+																				  size: 16.0), unselectedTabTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(color: .gray), tabHeight: CoreGraphics.CGFloat = 40, selectedTabBackgroundColor: SwiftUI.Color = .green, unselectedTabBackgroundColor: SwiftUI.Color = .clear, imageConfig: BeamKit.BKImageConfiguration = BKImageConfiguration(cornerRadius: 5, size: CGSize(width: 300, height: 150)), causeTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 14.0, weight: .semibold), nonprofitTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 20.0, weight: .bold), progressBarTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), causeDescriptionConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 14.0), goalCompletionTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), websiteLinkTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(color: Color(gray: 0.2), size: 14.0, weight: .semibold), logoHeaderConfig: BeamKit.BKLogoHeaderConfiguration = BKLogoHeaderConfiguration(), borderColor: SwiftUI.Color = Color(gray: 0.2), borderCornerRadius: CoreGraphics.CGFloat = 10, verticalPadding: CoreGraphics.CGFloat = 1, backgroundColor: SwiftUI.Color = .white)
+}
+@available(iOS 13.0, *)
+public struct BKImpactOverviewConfiguration {
+  public init(logoHeaderConfig: BeamKit.BKLogoHeaderConfiguration = BKLogoHeaderConfiguration(), title: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 20.0, weight: .bold), subtitle: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 16.0), cardImageHeight: CoreGraphics.CGFloat = 225.0, cardTitle: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 18.0), cardDescription: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 12.0), cardBorderConfig: BeamKit.BKBorderConfiguration = BKBorderConfiguration(width: 1, color: Color(gray: 0.7), cornerRadius: 4.0), linkText: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 12.0), verticalPadding: CoreGraphics.CGFloat = 5.0, backgroundColor: SwiftUI.Color = .white)
+}
+@available(iOS 13.0, *)
+public struct BKLogoHeaderConfiguration {
+  public init(chainLogoWidth: CoreGraphics.CGFloat = 75.0, beamLogoWidth: CoreGraphics.CGFloat = 75.0, chainLogoBottomPadding: CoreGraphics.CGFloat = 0.0, beamLogoBottomPadding: CoreGraphics.CGFloat = 0.0, backgroundColor: SwiftUI.Color = .white)
+}
+@available(iOS 13.0, *)
+public struct BKMinimalNonprofitViewConfiguration {
+  public init(widgetTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(color: .black, size: 30.0, weight: .regular), widgetSubtitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 16.0, weight: .light), confirmButtonConfig: BeamKit.BKButtonConfiguration = BKButtonConfiguration(borderConfig: BKBorderConfiguration(width: 0),
+																				   textConfig: BKTextConfiguration(size: 14.0, weight: .regular)), iconConfig: BeamKit.BKIconConfiguration = BKIconConfiguration(), causeButtonConfig: BeamKit.BKButtonConfiguration = BKButtonConfiguration(unselectedColor: .gray,
+																				 size: CGSize(width: 40.0, height: 40.0)), causeTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 14.0), causeDescriptionConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 14.0), beamTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), verticalPadding: CoreGraphics.CGFloat = 5.0, backgroundColor: SwiftUI.Color = .white)
+}
+@available(iOS 13.0, *)
+public struct BKPersonalImpactViewConfiguration {
+  public init(imageConfig: BeamKit.BKImageConfiguration = BKImageConfiguration(cornerRadius: 5, shape: .square, size: CGSize(width: 50, height: 50)), causeTitleConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 12.0), nonprofitNameConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 16.0, weight: .bold), goalDescriptionConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 11.0), goalCompletionConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(color: Color(gray: 0.5), size: 11.0, weight: .regular), borderConfig: BeamKit.BKBorderConfiguration = BKBorderConfiguration(cornerRadius: 5), progressBarTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), shouldShowChangeButton: Swift.Bool = false, changeButtonTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), verticalPadding: CoreGraphics.CGFloat = 1, backgroundColor: SwiftUI.Color = .white)
+}
+@available(iOS 13.0, *)
+public struct BKProgressBarConfiguration {
+  public init(height: CoreGraphics.CGFloat = 5.0, borderConfig: BeamKit.BKBorderConfiguration = BKBorderConfiguration(width: 0, color: .black, cornerRadius: 45), gradient: [SwiftUI.Color]? = nil, backgroundColor: SwiftUI.Color? = nil)
+}
+@available(iOS 13.0, *)
+public struct BKSelectedNonprofitViewConfiguration {
+  public init(impactDescriptionTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 16, weight: .bold), goalDescriptionTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(color: Color(gray: 0.5), weight: .regular), progressStringTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(size: 14), changeButtonTextConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), verticalPadding: CoreGraphics.CGFloat = 0, imageConfig: BeamKit.BKImageConfiguration = BKImageConfiguration(), showChangeButton: Swift.Bool = false, borderColor: SwiftUI.Color = .clear, borderWidth: CoreGraphics.CGFloat = 0, backgroundColor: SwiftUI.Color = .white, style: BeamKit.BKSelectedNonprofitViewConfiguration.Style = Style.regular, shouldShowDivider: Swift.Bool = true, dividerColor: SwiftUI.Color = .black, dividerHeight: CoreGraphics.CGFloat = 2)
+  public enum Style {
+    case regular
+    case outToLunch
+    public static func == (a: BeamKit.BKSelectedNonprofitViewConfiguration.Style, b: BeamKit.BKSelectedNonprofitViewConfiguration.Style) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(iOS 13.0, *)
+public struct BKTextConfiguration {
+  public init(color: SwiftUI.Color = .black, size: CoreGraphics.CGFloat = 12, weight: SwiftUI.Font.Weight = .regular)
+}
+public enum BKImageShape {
+  case circle
+  case square
+  public static func == (a: BeamKit.BKImageShape, b: BeamKit.BKImageShape) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 13.0, *)
+public struct BKImageConfiguration {
+  public init(cornerRadius: CoreGraphics.CGFloat = 0, shape: BeamKit.BKImageShape = .circle, size: CoreGraphics.CGSize = CGSize(width: 50.0, height: 50.0))
+}
+@available(iOS 13.0, *)
+public struct BKIconConfiguration {
+  public init(size: CoreGraphics.CGSize = CGSize(width: 20.0, height: 20.0), unselectedColor: SwiftUI.Color = .black, selectedColor: SwiftUI.Color = .white)
+}
+@available(iOS 13.0, *)
+public struct BKButtonConfiguration {
+  public init(unselectedColor: SwiftUI.Color = Color(gray: 0.8), selectedColor: SwiftUI.Color = .black, borderConfig: BeamKit.BKBorderConfiguration = BKBorderConfiguration(width: 1, color: .black, cornerRadius: 4), textConfig: BeamKit.BKTextConfiguration = BKTextConfiguration(), size: CoreGraphics.CGSize = CGSize(width: 100.0, height: 50.0))
+}
+@available(iOS 13.0, *)
+public struct BKBorderConfiguration {
+  public init(width: CoreGraphics.CGFloat = 2, color: SwiftUI.Color = .black, cornerRadius: CoreGraphics.CGFloat = 10)
+}
+@available(iOS 13.0, *)
+extension SwiftUI.Color {
+  public init(gray val: CoreGraphics.CGFloat, opacity: CoreGraphics.CGFloat = 1)
+}
+public protocol BKCommunityImpactViewDelegate : AnyObject {
+  func onSeeImpact()
+}
+public protocol BKImpactListViewDelegate : AnyObject {
+  func onWebsiteLink(website: Swift.String)
+}
+public protocol BKImpactOverviewDelegate : AnyObject {
+  func onWebsiteLink(website: Swift.String)
+  func onSeeAllImpact()
+  func onLoading()
+  func onLoaded(_ success: Swift.Bool)
+}
+public protocol BKNonprofitSelectionViewDelegate : AnyObject {
+  func onConfirm(nonprofitName: Swift.String, nonprofitCause: Swift.String)
+}
+public protocol BKPersonalImpactDelegate : AnyObject {
+  func onChange()
+}
+public protocol BKSelectedNonprofitViewDelegate : AnyObject {
+  func onChange()
+}
+public struct BKTransaction {
+  public init(cartTotal: Swift.Float, currencyCode: Swift.String, storeId: Swift.Int, email: Swift.String? = nil, postalCode: Swift.String? = nil, countryCode: Swift.String? = nil)
+}
+public struct HTTPMethod : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+  public static let delete: BeamKit.HTTPMethod
+  public static let get: BeamKit.HTTPMethod
+  public static let head: BeamKit.HTTPMethod
+  public static let patch: BeamKit.HTTPMethod
+  public static let post: BeamKit.HTTPMethod
+  public static let put: BeamKit.HTTPMethod
+  public let rawValue: Swift.String
+  public init(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+}
+public typealias Parameters = [Swift.String : Any]
+public protocol ParameterEncoding {
+  func encode(_ urlRequest: BeamKit.URLRequestConvertible, with parameters: BeamKit.Parameters?) throws -> Foundation.URLRequest
+}
+public struct URLEncoding : BeamKit.ParameterEncoding {
+  public enum Destination {
+    case methodDependent
+    case queryString
+    case httpBody
+    public static func == (a: BeamKit.URLEncoding.Destination, b: BeamKit.URLEncoding.Destination) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum ArrayEncoding {
+    case brackets
+    case noBrackets
+    public static func == (a: BeamKit.URLEncoding.ArrayEncoding, b: BeamKit.URLEncoding.ArrayEncoding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum BoolEncoding {
+    case numeric
+    case literal
+    public static func == (a: BeamKit.URLEncoding.BoolEncoding, b: BeamKit.URLEncoding.BoolEncoding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static var `default`: BeamKit.URLEncoding {
+    get
+  }
+  public static var queryString: BeamKit.URLEncoding {
+    get
+  }
+  public static var httpBody: BeamKit.URLEncoding {
+    get
+  }
+  public let destination: BeamKit.URLEncoding.Destination
+  public let arrayEncoding: BeamKit.URLEncoding.ArrayEncoding
+  public let boolEncoding: BeamKit.URLEncoding.BoolEncoding
+  public init(destination: BeamKit.URLEncoding.Destination = .methodDependent, arrayEncoding: BeamKit.URLEncoding.ArrayEncoding = .brackets, boolEncoding: BeamKit.URLEncoding.BoolEncoding = .numeric)
+  public func encode(_ urlRequest: BeamKit.URLRequestConvertible, with parameters: BeamKit.Parameters?) throws -> Foundation.URLRequest
+  public func queryComponents(fromKey key: Swift.String, value: Any) -> [(Swift.String, Swift.String)]
+  public func escape(_ string: Swift.String) -> Swift.String
+}
+public struct JSONEncoding : BeamKit.ParameterEncoding {
+  public static var `default`: BeamKit.JSONEncoding {
+    get
+  }
+  public static var prettyPrinted: BeamKit.JSONEncoding {
+    get
+  }
+  public let options: Foundation.JSONSerialization.WritingOptions
+  public init(options: Foundation.JSONSerialization.WritingOptions = [])
+  public func encode(_ urlRequest: BeamKit.URLRequestConvertible, with parameters: BeamKit.Parameters?) throws -> Foundation.URLRequest
+  public func encode(_ urlRequest: BeamKit.URLRequestConvertible, withJSONObject jsonObject: Any? = nil) throws -> Foundation.URLRequest
+}
+public protocol URLConvertible {
+  func asURL() throws -> Foundation.URL
+}
+extension Swift.String : BeamKit.URLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+extension Foundation.URL : BeamKit.URLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+extension Foundation.URLComponents : BeamKit.URLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+public protocol URLRequestConvertible {
+  func asURLRequest() throws -> Foundation.URLRequest
+}
+extension BeamKit.URLRequestConvertible {
+  public var urlRequest: Foundation.URLRequest? {
+    get
+  }
+}
+extension Foundation.URLRequest : BeamKit.URLRequestConvertible {
+  public func asURLRequest() throws -> Foundation.URLRequest
+}
+extension Foundation.URLRequest {
+  public init(url: BeamKit.URLConvertible, method: BeamKit.HTTPMethod, headers: BeamKit.HTTPHeaders? = nil) throws
+}
+extension Foundation.CharacterSet {
+  public static let afURLQueryAllowed: Foundation.CharacterSet
+}
+public struct HTTPHeaders {
+  public init()
+  public init(_ headers: [BeamKit.HTTPHeader])
+  public init(_ dictionary: [Swift.String : Swift.String])
+  public mutating func add(name: Swift.String, value: Swift.String)
+  public mutating func add(_ header: BeamKit.HTTPHeader)
+  public mutating func update(name: Swift.String, value: Swift.String)
+  public mutating func update(_ header: BeamKit.HTTPHeader)
+  public mutating func remove(name: Swift.String)
+  public mutating func sort()
+  public func sorted() -> BeamKit.HTTPHeaders
+  public func value(for name: Swift.String) -> Swift.String?
+  public subscript(name: Swift.String) -> Swift.String? {
+    get
+    set
+  }
+  public var dictionary: [Swift.String : Swift.String] {
+    get
+  }
+}
+extension BeamKit.HTTPHeaders : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, Swift.String)...)
+  public typealias Key = Swift.String
+  public typealias Value = Swift.String
+}
+extension BeamKit.HTTPHeaders : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: BeamKit.HTTPHeader...)
+  public typealias ArrayLiteralElement = BeamKit.HTTPHeader
+}
+extension BeamKit.HTTPHeaders : Swift.Sequence {
+  public func makeIterator() -> Swift.IndexingIterator<[BeamKit.HTTPHeader]>
+}
+extension BeamKit.HTTPHeaders : Swift.Collection {
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  public subscript(position: Swift.Int) -> BeamKit.HTTPHeader {
+    get
+  }
+  public func index(after idx: Swift.Int) -> Swift.Int
+  public typealias Element = BeamKit.HTTPHeader
+  public typealias Index = Swift.Int
+  public typealias Indices = Swift.DefaultIndices<BeamKit.HTTPHeaders>
+  public typealias Iterator = Swift.IndexingIterator<[BeamKit.HTTPHeader]>
+  public typealias SubSequence = Swift.Slice<BeamKit.HTTPHeaders>
+}
+extension BeamKit.HTTPHeaders : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public struct HTTPHeader : Swift.Hashable {
+  public let name: Swift.String
+  public let value: Swift.String
+  public init(name: Swift.String, value: Swift.String)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: BeamKit.HTTPHeader, b: BeamKit.HTTPHeader) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension BeamKit.HTTPHeader : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension BeamKit.HTTPHeader {
+  public static func accept(_ value: Swift.String) -> BeamKit.HTTPHeader
+  public static func acceptCharset(_ value: Swift.String) -> BeamKit.HTTPHeader
+  public static func acceptLanguage(_ value: Swift.String) -> BeamKit.HTTPHeader
+  public static func acceptEncoding(_ value: Swift.String) -> BeamKit.HTTPHeader
+  public static func authorization(username: Swift.String, password: Swift.String) -> BeamKit.HTTPHeader
+  public static func authorization(bearerToken: Swift.String) -> BeamKit.HTTPHeader
+  public static func authorization(_ value: Swift.String) -> BeamKit.HTTPHeader
+  public static func contentDisposition(_ value: Swift.String) -> BeamKit.HTTPHeader
+  public static func contentType(_ value: Swift.String) -> BeamKit.HTTPHeader
+  public static func userAgent(_ value: Swift.String) -> BeamKit.HTTPHeader
+}
+extension BeamKit.HTTPHeaders {
+  public static let `default`: BeamKit.HTTPHeaders
+}
+extension BeamKit.HTTPHeader {
+  public static let defaultAcceptEncoding: BeamKit.HTTPHeader
+  public static let defaultAcceptLanguage: BeamKit.HTTPHeader
+  public static let defaultUserAgent: BeamKit.HTTPHeader
+}
+extension Foundation.URLRequest {
+  public var headers: BeamKit.HTTPHeaders {
+    get
+    set
+  }
+}
+extension Foundation.HTTPURLResponse {
+  public var headers: BeamKit.HTTPHeaders {
+    get
+  }
+}
+extension Foundation.URLSessionConfiguration {
+  public var headers: BeamKit.HTTPHeaders {
+    get
+    set
+  }
+}
+public struct FontIdentifiers {
+  public static var regular: BeamKit.FontInfo
+  public static var semiBold: BeamKit.FontInfo
+  public static var bold: BeamKit.FontInfo
+}
+public struct FontInfo {
+  public init(fontFileName: Swift.String, bundle: Foundation.Bundle, fileExtension: Swift.String, fontFamilyName: Swift.String? = nil)
+}
+@_hasMissingDesignatedInitializers public class CustomFonts {
+  public static func registerCustomFonts()
+  @objc deinit
+}
+@available(iOS 13.0.0, *)
+@_Concurrency.MainActor(unsafe) public struct BKCommunityImpactView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(config: BeamKit.BKCommunityImpactViewConfiguration = BKCommunityImpactViewConfiguration(), delegate: BeamKit.BKCommunityImpactViewDelegate? = nil)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s7BeamKit21BKCommunityImpactViewV4bodyQrvp", 0) __
+}
+@available(iOS 13.0.0, *)
+@_Concurrency.MainActor(unsafe) public struct BKFullScreenNonprofitSelectionView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public init(config: BeamKit.BKFullScreenNonprofitViewConfiguration = BKFullScreenNonprofitViewConfiguration(), delegate: BeamKit.BKNonprofitSelectionViewDelegate? = nil, isPrePurchase: Swift.Bool)
+  public typealias Body = @_opaqueReturnTypeOf("$s7BeamKit34BKFullScreenNonprofitSelectionViewV4bodyQrvp", 0) __
+}
+@available(iOS 13.0.0, *)
+@_Concurrency.MainActor(unsafe) public struct BKImpactListView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public init(config: BeamKit.BKImpactListConfiguration = BKImpactListConfiguration(), delegate: BeamKit.BKImpactListViewDelegate? = nil)
+  public typealias Body = @_opaqueReturnTypeOf("$s7BeamKit16BKImpactListViewV4bodyQrvp", 0) __
+}
+@available(iOS 13.0.0, *)
+@_Concurrency.MainActor(unsafe) public struct BKMinimalNonprofitSelectionView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(config: BeamKit.BKMinimalNonprofitViewConfiguration = BKMinimalNonprofitViewConfiguration(), delegate: BeamKit.BKNonprofitSelectionViewDelegate? = nil, isPrePurchase: Swift.Bool)
+  @SwiftUI.State @_projectedValueProperty($selectedNonprofitIndex) @_Concurrency.MainActor(unsafe) public var selectedNonprofitIndex: Swift.Int? {
+    get
+    @available(iOS 13.0.0, *)
+    nonmutating set
+    @available(iOS 13.0.0, *)
+    nonmutating _modify
+  }
+  @_Concurrency.MainActor(unsafe) public var $selectedNonprofitIndex: SwiftUI.Binding<Swift.Int?> {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s7BeamKit31BKMinimalNonprofitSelectionViewV4bodyQrvp", 0) __
+}
+@available(iOS 13.0.0, *)
+@_Concurrency.MainActor(unsafe) public struct BKOrderPageView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(transaction: BeamKit.BKTransaction, orderId: Swift.String, minNonprofitConfig: BeamKit.BKMinimalNonprofitViewConfiguration = BKMinimalNonprofitViewConfiguration(), impactOverviewConfig: BeamKit.BKImpactOverviewConfiguration = BKImpactOverviewConfiguration(), minNonprofitDelegate: BeamKit.BKNonprofitSelectionViewDelegate? = nil, impactOverviewDelegate: BeamKit.BKImpactOverviewDelegate? = nil)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s7BeamKit15BKOrderPageViewV4bodyQrvp", 0) __
+}
+@available(iOS 13.0, *)
+@_Concurrency.MainActor(unsafe) public struct BKPersonalImpactView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(config: BeamKit.BKPersonalImpactViewConfiguration = BKPersonalImpactViewConfiguration(), delegate: BeamKit.BKPersonalImpactDelegate? = nil)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s7BeamKit20BKPersonalImpactViewV4bodyQrvp", 0) __
+}
+@available(iOS 13.0, *)
+@_Concurrency.MainActor(unsafe) public struct BKSelectedNonprofitView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(config: BeamKit.BKSelectedNonprofitViewConfiguration = BKSelectedNonprofitViewConfiguration(), delegate: BeamKit.BKSelectedNonprofitViewDelegate? = nil)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s7BeamKit23BKSelectedNonprofitViewV4bodyQrvp", 0) __
+}
+extension BeamKit.BKAppEnvironment : Swift.Equatable {}
+extension BeamKit.BKAppEnvironment : Swift.Hashable {}
+extension BeamKit.BKError : Swift.Equatable {}
+extension BeamKit.BKError : Swift.Hashable {}
+extension BeamKit.BKLogLevel : Swift.Equatable {}
+extension BeamKit.BKLogLevel : Swift.Hashable {}
+extension BeamKit.BKLogLevel : Swift.RawRepresentable {}
+@available(iOS 13.0, *)
+extension BeamKit.BKSelectedNonprofitViewConfiguration.Style : Swift.Equatable {}
+@available(iOS 13.0, *)
+extension BeamKit.BKSelectedNonprofitViewConfiguration.Style : Swift.Hashable {}
+extension BeamKit.BKImageShape : Swift.Equatable {}
+extension BeamKit.BKImageShape : Swift.Hashable {}
+extension BeamKit.URLEncoding.Destination : Swift.Equatable {}
+extension BeamKit.URLEncoding.Destination : Swift.Hashable {}
+extension BeamKit.URLEncoding.ArrayEncoding : Swift.Equatable {}
+extension BeamKit.URLEncoding.ArrayEncoding : Swift.Hashable {}
+extension BeamKit.URLEncoding.BoolEncoding : Swift.Equatable {}
+extension BeamKit.URLEncoding.BoolEncoding : Swift.Hashable {}
